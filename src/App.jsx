@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { Routes, Route, Link, /*useNavigate*/ } from 'react-router-dom';
 import Home from './pages/Home'; // Create these page components
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -11,7 +11,7 @@ import ProtectedRoute from './components/ProtectedRoute'; // Import ProtectedRou
 
 function Navbar() {
   const { isAuthenticated, logout, user } = useAuth();
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const handleLogout = () => {
       logout(); // Call logout from context
