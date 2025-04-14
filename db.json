@@ -1,0 +1,10 @@
+{
+  "users": [
+    {
+      "id": "6d42",
+      "email": "testas@pastas.lt",
+      "password": "plaintext"
+    }
+  ],
+  "favorites": []
+}
