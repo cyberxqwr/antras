@@ -42,14 +42,13 @@ function Navbar() {
 function App() {
   return (
     <div>
-      <Navbar /> {/* Use the Navbar component */}
+      <Navbar />
       <hr />
       <Routes>
-        {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/recipe/:id" element={<RecipeDetail />} /> {/* Public recipe detail */}
+        <Route path="/recipe/:id" element={<RecipeDetail />} />
 
         {/* Protected Routes */}
         <Route
@@ -69,7 +68,6 @@ function App() {
           }
         />
 
-        {/* Add a catch-all or Not Found route if desired */}
         <Route path="*" element={<div>404 Not Found</div>} />
 
       </Routes>

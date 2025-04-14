@@ -11,10 +11,10 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(''); // Clear previous errors
+    setError('');
     const success = await login(email, password);
     if (success) {
-      navigate('/dashboard'); // Redirect to dashboard on successful login
+      navigate('/dashboard');
     } else {
       setError('Prisijungti nepavyko. Patikrinkite el. paštą ir slaptažodį.'); // Failed login message
     }

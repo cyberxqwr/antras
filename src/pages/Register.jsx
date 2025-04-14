@@ -5,7 +5,7 @@ import { useNavigate, Link } from 'react-router-dom';
 function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState(''); // Added confirm password
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
     const { register } = useAuth();
     const navigate = useNavigate();
@@ -19,12 +19,10 @@ function Register() {
             return;
         }
 
-        const success = await register(email, password); // Call register from context
+        const success = await register(email, password);
         if (success) {
-            navigate('/dashboard'); // Redirect to dashboard on successful registration
+            navigate('/dashboard');
         } else {
-            // Error might be 'Email already exists' or generic
-            // The context register function could return more specific errors
             setError('Registracija nepavyko. Bandykite dar kartą arba el. paštas jau naudojamas.');
         }
     };
@@ -42,7 +40,7 @@ function Register() {
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>
                 <div>
-                    <label>Pakartoti slaptažodį:</label> {/* Added confirm password */}
+                    <label>Pakartoti slaptažodį:</label>
                     <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
                 </div>
                 {error && <p style={{ color: 'red' }}>{error}</p>}

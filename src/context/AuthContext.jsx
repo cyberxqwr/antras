@@ -6,10 +6,9 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true); // Handle initial load
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // Check localStorage on initial load
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
@@ -22,14 +21,11 @@ export const AuthProvider = ({ children }) => {
          localStorage.removeItem('user');
       }
     }
-    setLoading(false); // Finished loading initial auth state
+    setLoading(false);
   }, []);
 
   const login = async (email, password) => {
-    // --- IMPORTANT: REAL HASHING NEEDED IN PRODUCTION ---
-    // This is a simplified check against the mock backend
     try {
-      //const response = await fetch(`http://localhost:3001/users?email=<span class="math-inline">\{email\}&password\=</span>{password}`);
       const response = await fetch(`http://localhost:3001/users?email=${email}&password=${password}`);
       if (!response.ok) throw new Error('Network response was not ok');
       const users = await response.json();
@@ -39,20 +35,17 @@ export const AuthProvider = ({ children }) => {
         setUser(userData);
         setIsAuthenticated(true);
         localStorage.setItem('user', JSON.stringify(userData));
-        return true; // Indicate success
+        return true;
       } else {
         throw new Error('Invalid credentials');
       }
     } catch (error) {
       console.error("Login failed:", error);
-      // Handle specific errors or just indicate failure
-      return false; // Indicate failure
+      return false;
     }
   };
 
   const register = async (email, password) => {
-    // --- IMPORTANT: REAL HASHING NEEDED IN PRODUCTION ---
-    // Check if user already exists
      try {
         const checkResponse = await fetch(`http://localhost:3001/users?email=${email}`);
         const existingUsers = await checkResponse.json();
@@ -60,11 +53,10 @@ export const AuthProvider = ({ children }) => {
             throw new Error('Email already exists.');
         }
 
-        // Create new user
         const response = await fetch('http://localhost:3001/users', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }), // Store password plaintext (BAD PRACTICE!)
+            body: JSON.stringify({ email, password }),
         });
         if (!response.ok) throw new Error('Registration failed on server.');
 
@@ -72,10 +64,10 @@ export const AuthProvider = ({ children }) => {
         setUser(newUser);
         setIsAuthenticated(true);
         localStorage.setItem('user', JSON.stringify(newUser));
-         return true; // Indicate success
+         return true;
      } catch (error) {
          console.error("Registration failed:", error);
-         return false; // Indicate failure
+         return false;
      }
   };
 
@@ -83,12 +75,11 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     setIsAuthenticated(false);
     localStorage.removeItem('user');
-    navigate('/login'); // Redirect to login after logout
+    navigate('/login');
   };
 
-  // Don't render children until initial loading is done
   if (loading) {
-      return <div>Loading authentication...</div>; // Or a spinner component
+      return <div>Loading authentication...</div>;
   }
 
   return (
@@ -98,7 +89,6 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// Custom hook to easily use the Auth Context
 export const useAuth = () => {
   return useContext(AuthContext);
 };

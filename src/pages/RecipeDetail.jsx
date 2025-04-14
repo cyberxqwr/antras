@@ -14,7 +14,7 @@ function RecipeDetail() {
       setError(null);
       try {
         const response = await fetch(`https://dummyjson.com/recipes/${id}`);
-        if (!response.ok) throw new Error('Failed to fetch recipe details');
+        if (!response.ok) throw new Error('Nepavyko gauti recepto detalių');
         const data = await response.json();
         setRecipe(data);
       } catch (err) {
@@ -28,7 +28,7 @@ function RecipeDetail() {
     if (id) {
       fetchRecipe();
     }
-  }, [id]); // Re-fetch if ID changes
+  }, [id]);
 
   if (loading) return <div>Kraunama recepto detales...</div>;
   if (error) return <div>Klaida: {error}</div>;
@@ -54,7 +54,6 @@ function RecipeDetail() {
           <li key={index}>{instruction}</li>
         ))}
       </ol>
-      {/* Add favorite button here too? Optional */}
     </div>
   );
 }
