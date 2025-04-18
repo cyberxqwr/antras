@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-// import axios from 'axios'; // Or use fetch
 
 function RecipeDetail() {
-  const { id } = useParams(); // Get recipe ID from URL parameter
+  const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
