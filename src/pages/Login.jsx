@@ -16,7 +16,7 @@ function Login() {
     if (success) {
       navigate('/dashboard');
     } else {
-      setError('Prisijungti nepavyko. Patikrinkite el. paštą ir slaptažodį.'); // Failed login message
+      setError('Prisijungti nepavyko. Patikrinkite el. paštą ir slaptažodį.');
     }
   };
 
