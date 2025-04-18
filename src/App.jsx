@@ -1,21 +1,20 @@
 import React from 'react';
 import { Routes, Route, Link, /*useNavigate*/ } from 'react-router-dom';
-import Home from './pages/Home'; // Create these page components
+import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Dashboard from './pages/Dashboard'; // Will contain RecipeList
-import Favorites from './pages/Favorites'; // Will contain Favorite Recipes
-import RecipeDetail from './pages/RecipeDetail'; // For Task 2
-import { useAuth } from './context/AuthContext'; // Import useAuth
-import ProtectedRoute from './components/ProtectedRoute'; // Import ProtectedRoute
+import Dashboard from './pages/Dashboard';
+import Favorites from './pages/Favorites';
+import RecipeDetail from './pages/RecipeDetail';
+import { useAuth } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function Navbar() {
   const { isAuthenticated, logout, user } = useAuth();
   //const navigate = useNavigate();
 
   const handleLogout = () => {
-      logout(); // Call logout from context
-      // Navigation is handled within the logout function in context
+      logout();
   };
 
   return (
@@ -50,7 +49,6 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/recipe/:id" element={<RecipeDetail />} />
 
-        {/* Protected Routes */}
         <Route
           path="/dashboard"
           element={
