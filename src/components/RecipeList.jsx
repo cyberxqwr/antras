@@ -15,7 +15,7 @@ function RecipeList() {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch('https://dummyjson.com/recipes?limit=0'); // Use limit=0 or a high number to get all for total count
+        const response = await fetch('https://dummyjson.com/recipes?limit=0');
         if (!response.ok) throw new Error('Nepavyko išgauti receptų');
         const data = await response.json();
 
